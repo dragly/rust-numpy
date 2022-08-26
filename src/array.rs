@@ -1379,7 +1379,8 @@ impl<T: Element, D> PyArray<T, D> {
         dims: ID,
         order: NPY_ORDER,
     ) -> PyResult<&'py PyArray<T, ID::Dim>> {
-        let mut dims = dims.into_dimension().to_npy_dims();
+        let dims = dims.into_dimension();
+        let mut dims = dims.to_npy_dims();
         let ptr = unsafe {
             PY_ARRAY_API.PyArray_Newshape(
                 self.py(),
